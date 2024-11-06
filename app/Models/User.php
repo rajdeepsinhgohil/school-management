@@ -50,4 +50,16 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function student()
+    {
+        return $this->hasMany(Student::class);
+    }
+
+    public function announcements()
+    {
+        return $this->belongsToMany(Announcement::class, 'teacher_announcements', 'teacher_id')
+            ->withPivot('is_read')
+            ->withTimestamps();
+    }
 }

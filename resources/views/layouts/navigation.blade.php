@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route(Auth::user()->role == \App\Models\User::ROLE_ADMIN ? 'teacher.list' : 'student.list') }}">
+                    <a href="{{ route(Auth::user()->role == \App\Models\User::ROLE_ADMIN ? 'teacher.list' : 'dashboard') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                     </a>
                 </div>
@@ -17,14 +17,30 @@
                             {{ __('Teacher') }}
                         </x-nav-link>
                     </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('teacher.announcement.list')" :active="request()->routeIs(['teacher.announcement.list', 'teacher.announcement.add', 'specific.teacher.announcement.list'])">
+                            {{ __('Announcement') }}
+                        </x-nav-link>
+                    </div>
+                @else
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                            {{ __('Dashboard') }}
+                        </x-nav-link>
+                    </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('student.announcement.list')" :active="request()->routeIs(['student.announcement.list', 'student.announcement.add'])">
+                            {{ __('Announcement') }}
+                        </x-nav-link>
+                    </div>
                 @endif
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('student.list')" :active="request()->routeIs(['student.list'])">
+                    <x-nav-link :href="route('student.list')" :active="request()->routeIs(['student.list', 'student.add', 'student.edit'])">
                         {{ __('Students') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('parent.list')" :active="request()->routeIs(['parent.list'])">
+                    <x-nav-link :href="route('parent.list')" :active="request()->routeIs(['parent.list', 'parent.add', 'parent.edit'])">
                         {{ __('Parents') }}
                     </x-nav-link>
                 </div>

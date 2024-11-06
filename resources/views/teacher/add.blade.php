@@ -18,12 +18,12 @@
                         </div>
                         <div>
                             <x-input-label for="email" :value="__('Email')" />
-                            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email')" required autocomplete="email" />
+                            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email')" autocomplete="email" />
                             <x-input-error class="mt-2" :messages="$errors->get('email')" />
                         </div>
                         <div>
                             <x-input-label for="mobile" :value="__('Mobile Number')" />
-                            <x-text-input id="mobile" name="mobile" type="text" class="mt-1 block w-full" :value="old('mobile')" required autocomplete="mobile" />
+                            <x-text-input id="mobile" name="mobile" type="text" class="mt-1 block w-full" :value="old('mobile')" autocomplete="mobile" />
                             <x-input-error class="mt-2" :messages="$errors->get('mobile')" />
                         </div>
                         <div class="mt-4">
@@ -40,7 +40,7 @@
                             <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
                             <x-text-input id="password_confirmation" class="block mt-1 w-full"
                                           type="password"
-                                          name="password_confirmation" required autocomplete="new-password" />
+                                          name="password_confirmation" autocomplete="new-password" />
                             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                         </div>
                         <div class="text-end">

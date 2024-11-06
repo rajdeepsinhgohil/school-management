@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Student;
+use App\Models\TeacherAnnouncement;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -35,7 +37,7 @@ class TeacherController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:40'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
-            'mobile' => ['digits:10'],
+            'mobile' => ['numeric','digits:10'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -46,7 +48,7 @@ class TeacherController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect(route('teacher.list'));
+        return redirect(route('teacher.list'))->with('success', 'Create successfully');
     }
 
     /**
@@ -72,7 +74,7 @@ class TeacherController extends Controller
             'id' => ['required', Rule::exists('users', 'id')->where('role', User::ROLE_TEACHER)],
             'name' => ['required', 'string', 'max:40'],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users', 'email')->whereNot('id', $request->id)],
-            'mobile' => ['digits:10']
+            'mobile' => ['numeric', 'digits:10']
         ]);
 
         User::where('id', $request->id)->update([
@@ -81,7 +83,7 @@ class TeacherController extends Controller
             'mobile' => $request->mobile
         ]);
 
-        return redirect(route('teacher.list'));
+        return redirect()->route('teacher.list')->with('success', 'Edit successfully');
     }
 
     /**
@@ -94,7 +96,10 @@ class TeacherController extends Controller
             'id' => ['required', Rule::exists('users', 'id')->where('role', User::ROLE_TEACHER)],
         ])->validate();
 
+        TeacherAnnouncement::where('teacher_id', $request->id)->delete();
+        Student::where('teacher_id', $request->id)->delete();
+
         User::where('id', $request->id)->delete();
-        return redirect(route('teacher.list'));
+        return redirect(route('teacher.list'))->with('success', 'Delete successfully');
     }
 }

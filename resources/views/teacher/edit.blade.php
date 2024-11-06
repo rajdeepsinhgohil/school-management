@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Add Teacher') }}
+            {{ __('Edit Teacher') }}
         </h2>
     </x-slot>
 
@@ -19,12 +19,12 @@
                         </div>
                         <div>
                             <x-input-label for="email" :value="__('Email')" />
-                            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $teacher->email)" required autocomplete="email" />
+                            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $teacher->email)" autocomplete="email" />
                             <x-input-error class="mt-2" :messages="$errors->get('email')" />
                         </div>
                         <div>
                             <x-input-label for="mobile" :value="__('Mobile Number')" />
-                            <x-text-input id="mobile" name="mobile" type="text" class="mt-1 block w-full" :value="old('mobile', $teacher->mobile)" required autocomplete="mobile" />
+                            <x-text-input id="mobile" name="mobile" type="text" class="mt-1 block w-full" :value="old('mobile', $teacher->mobile)" autocomplete="mobile" />
                             <x-input-error class="mt-2" :messages="$errors->get('mobile')" />
                         </div>
                         <div class="text-end">

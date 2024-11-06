@@ -29,6 +29,21 @@
 
             <!-- Page Content -->
             <main>
+                @if (session('success'))
+                    <div class="flex items-center bg-green-100 border-l-4 border-green-500 text-green-700 p-4" role="alert">
+                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                        </svg>
+                        <p class="text-sm">{{ session('success') }}</p>
+                    </div>
+                @endif
+                @if (session('error'))
+                    <div class="flex items-center bg-red-100 border-l-4 border-red-500 text-red-700 p-4" role="alert">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M6.4 19L5 17.6l5.6-5.6L5 6.4L6.4 5l5.6 5.6L17.6 5L19 6.4L13.4 12l5.6 5.6l-1.4 1.4l-5.6-5.6z"/></svg>
+                        <p class="text-sm">{{ session('error') }}</p>
+                    </div>
+                @endif
+
                 {{ $slot }}
             </main>
         </div>
